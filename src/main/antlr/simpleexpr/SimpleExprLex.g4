@@ -1,7 +1,7 @@
 lexer grammar SimpleExprLex;
 
 @header {
-package simpleexprlexer;
+package simpleexpr;
 }
 
 SEMI : ';' ;
