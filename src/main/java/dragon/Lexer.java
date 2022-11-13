@@ -5,7 +5,7 @@ public abstract class Lexer {
 
   private final String input;
   char peek;
-  private int pos;
+  int pos;
 
   public Lexer(String input) {
     this.input = input;
@@ -14,6 +14,11 @@ public abstract class Lexer {
   }
 
   public abstract Token nextToken();
+
+  public void reset(int pos) {
+    this.pos = pos;
+    this.peek = input.charAt(pos);
+  }
 
   public void consume() {
     this.pos++;
