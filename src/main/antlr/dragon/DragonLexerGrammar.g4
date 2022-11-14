@@ -16,13 +16,15 @@ EQ : '=' ;
 NE : '<>' ;
 LT : '<' ;
 LE : '<=' ;
-QT : '>' ;
-QE : '>=' ;
+GT : '>' ;
+GE : '>=' ;
 
 DOT : '.' ;
 POS : '+' ;
 NEG : '-' ;
 
+REAL : DIGITS ('.' DIGITS)? ;
+SCI : DIGITS ('.' DIGITS)? ([eE] [+-]? DIGITS)? ;
 
 fragment DIGIT :  [0-9] ;
 fragment DIGITS : [0-9]+ ;

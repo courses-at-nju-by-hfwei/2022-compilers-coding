@@ -10,6 +10,51 @@ public class DragonLexer extends Lexer {
   @Override
   public Token nextToken() {
     // add code below
+    if (peek == EOF) {
+      return Token.EOF;
+    }
+
+    if (Character.isWhitespace(peek)) {
+      return WS();
+    }
+
+    if (Character.isLetter(peek)) {
+      return ID();
+    }
+
+    if (Character.isDigit(peek)) {
+      return NUMBER();
+    }
+
+    if (peek == '=') {
+      advance();
+      return Token.EQ;
+    }
+
+    if (peek == '>') {
+      advance();
+      if (peek == '=') {
+        advance();
+        return Token.GE;
+      }
+
+      return Token.GT;
+    }
+
+    if (peek == '<') {
+      advance();
+      if (peek == '=') {
+        advance();
+        return Token.LE;
+      }
+
+      if (peek == '>') {
+        advance();
+        return Token.NE;
+      }
+
+      return Token.GT;
+    }
 
     // unknown tokens (characters)
     Token unknown = new Token(TokenType.UNKNOWN, Character.toString(peek));
@@ -18,18 +63,38 @@ public class DragonLexer extends Lexer {
   }
 
   private Token WS() {
+    while (Character.isWhitespace(peek)) {
+      advance();
+    }
 
     return Token.WS;
   }
 
   private Token ID() {
+    StringBuilder sb = new StringBuilder();
 
-    return null;
+    do {
+      sb.append(peek);
+      advance();
+    } while (Character.isLetterOrDigit(peek));
+
+    Token token = this.kwTable.getKeyword(sb.toString());
+    if (token == null) {
+      return new Token(TokenType.ID, sb.toString());
+    }
+
+    return token;
   }
 
   private Token INT() {
+    StringBuilder sb = new StringBuilder();
 
-    return null;
+    do {
+      sb.append(peek);
+      advance();
+    } while (Character.isDigit(peek));
+
+    return new Token(TokenType.INT, sb.toString());
   }
 
   private Token NUMBER() {
@@ -37,98 +102,117 @@ public class DragonLexer extends Lexer {
     intStr.append(peek);
     advance();
 
+    int intPos = -1;
+    int realPos = -1;
+
+    StringBuilder realStr = new StringBuilder();
+    StringBuilder sciStr = new StringBuilder();
+
     int state = 13;
     while (true) {
       switch (state) {
         case 13:
+          intPos = pos;
           if (Character.isDigit(peek)) {
             // add code here
+            intStr.append(peek);
 
             advance();
             state = 13;
             break;
           } else if (peek == '.') {
             // add code here
+            realStr.append(peek);
 
             advance();
             state = 14;
             break;
           } else if (peek == 'E' || peek == 'e') {
             // add code here
+            sciStr.append(peek);
 
             advance();
             state = 16;
             break;
           } else {
-            break;
+            return new Token(TokenType.INT, intStr.toString());
           }
         case 14:
           if (Character.isDigit(peek)) {
             // add code here
+            realStr.append(peek);
 
             advance();
             state = 15;
             break;
           } else {
-            break;
+            this.reset(intPos);
+            return new Token(TokenType.INT, intStr.toString());
           }
         case 15:
+          realPos = pos;
           if (Character.isDigit(peek)) {
             // add code here
+            realStr.append(peek);
 
             advance();
             state = 15;
             break;
-          } else if (peek == 'E') {
+          } else if (peek == 'E' || peek == 'e') {
             // add code here
+            sciStr.append(peek);
 
             advance();
             state = 16;
             break;
           } else {
-            break;
+            return new Token(TokenType.REAL, intStr.append(realStr).toString());
           }
         case 16:
           if (peek == '+' || peek == '-') {
             // add code here
+            sciStr.append(peek);
 
             advance();
             state = 17;
             break;
           } else if (Character.isDigit(peek)) {
+            sciStr.append(peek);
             // add code here
 
             advance();
             state = 18;
             break;
           } else {
-            break;
+            this.reset(realPos);
+            return new Token(TokenType.REAL, intStr.append(realStr).toString());
           }
         case 17:
           if (Character.isDigit(peek)) {
+            sciStr.append(peek);
             // add code here
 
             advance();
             state = 18;
             break;
           } else {
-            break;
+            this.reset(realPos);
+            return new Token(TokenType.REAL, intStr.append(realStr).toString());
           }
         case 18:
           if (Character.isDigit(peek)) {
             // add code here
+            sciStr.append(peek);
 
             advance();
             state = 18;
             break;
           } else {
-            break;
+            return new Token(TokenType.SCI, intStr.append(realStr).append(sciStr).toString());
           }
         default:
           System.err.println("Unreachable");
       }
-      // TODO: remove the following line of code; it is just for suppressing the warning
-      return null;
     }
   }
 }
