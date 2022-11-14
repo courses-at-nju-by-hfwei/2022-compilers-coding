@@ -1,7 +1,7 @@
 package dragon;
 
 /**
- * Types of tokens
+ * Types of tokens (in groups)
  */
 public enum TokenType {
   // Group 0
