@@ -1,17 +1,15 @@
 grammar IfStatFactor;
 
 @header {
-package ifstatefactor;
+package ifstat.ifstatefactor;
 }
 
 stat : 'if' expr 'then' stat stat_prime ;
-
-stat_prime : ('else' stat)? ;
+stat_prime : 'else' stat
+     |
+     ;
 
 expr : ID ;
 
-ID : LETTER (LETTER | DIGIT)* ;
-fragment DIGIT : [0-9] ;
-fragment LETTER : [a-zA-Z] ;
-
-WS  : [ \t\n\r]+ -> skip ;
+ID : [a-z] ;
+WS : [ \t\n\r]+ -> skip ;

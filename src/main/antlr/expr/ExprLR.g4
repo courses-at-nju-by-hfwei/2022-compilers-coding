@@ -16,6 +16,6 @@ term : term '*' factor
      ;
 
 factor : DIGIT ;
-DIGIT : [0-9] ;
 
-WS  : [ \t\n\r]+ -> skip ;
+DIGIT : [0-9] ;
+WS : [ \t\n\r]+ -> skip ;

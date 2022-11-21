@@ -93,7 +93,6 @@ NE : '!=' ;
 EE : '==' ;
 ////////////////////////////////////////////
 WS  : [ \t\n\r]+ -> skip ;
-SL_COMMENT : '//' .*? '\n' -> skip ;
 
 ID : LETTER (LETTER | DIGIT)* ;
 INT : DIGIT+ ;
