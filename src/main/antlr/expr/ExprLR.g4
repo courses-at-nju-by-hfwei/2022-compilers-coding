@@ -7,10 +7,12 @@ package expr;
 
 prog : expr EOF ;
 
+//expr : term ('-' term)* ;
 expr : expr '-' term
      | term
      ;
 
+// term: factor ('*' factor)* ;
 term : term '*' factor
      | factor
      ;

@@ -33,33 +33,33 @@ stat : block
      | expr ';'
      ;
 
-expr: ID '(' exprList? ')'
-    | expr '[' expr ']'
-    | '-' expr
-    | '!' expr
-    | expr '^' expr
-    | expr ('*'| '/') expr
-    | expr ('+'| '-') expr
-    | expr ('==' | '!=') expr
-    | '(' expr ')'
-    | ID
-    | INT
-    ;
+//expr: ID '(' exprList? ')'  # Call // function call f()
+//    | expr '[' expr ']'     // a[i], a[i][j]
+//    | '-' expr  // ----1
+//    | '!' expr
+//    | <assoc = right> expr '^' expr // 2 ^ 3 ^ 4
+//    | expr (op = '*' | op = '/') expr # MulDiv
+//    | expr ('+' | '-') expr
+//    | expr ('==' | '!=') expr
+//    | '(' expr ')'
+//    | ID
+//    | INT
+//    ;
 
 exprList : expr (',' expr)* ;
 
-//expr: ID '(' exprList? ')'    # Call // function call
-//    | expr '[' expr ']'       # Index // array subscripts
-//    | op = '-' expr                # Negate // right association
-//    | op = '!' expr                # Not // right association
-//    | <assoc = right> expr '^' expr # Power
-//    | lhs = expr (op = '*'| op = '/') rhs = expr     # MultDiv
-//    | lhs = expr (op = '+'| op = '-') rhs = expr     # AddSub
-//    | lhs = expr (op = '==' | op = '!=') rhs = expr  # EQNE
-//    | '(' expr ')'            # Parens
-//    | ID                      # Id
-//    | INT                     # Int
-//    ;
+expr: ID '(' exprList? ')'    # Call // function call
+    | expr '[' expr ']'       # Index // array subscripts
+    | op = '-' expr                # Negate // right association
+    | op = '!' expr                # Not // right association
+    | <assoc = right> expr '^' expr # Power
+    | lhs = expr (op = '*'| op = '/') rhs = expr     # MultDiv
+    | lhs = expr (op = '+'| op = '-') rhs = expr     # AddSub
+    | lhs = expr (op = '==' | op = '!=') rhs = expr  # EQNE
+    | '(' expr ')'            # Parens
+    | ID                      # Id
+    | INT                     # Int
+    ;
 ////////////////////////////////////////////
 // You can use "Alt + Insert" to automatically generate
 // the following lexer rules for literals in the grammar above.
