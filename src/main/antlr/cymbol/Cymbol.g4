@@ -25,12 +25,12 @@ formalParameter : type ID ;
 
 block : '{' stat* '}' ;
 
-stat : block
-     | varDecl
-     | 'if' expr 'then' stat ('else' stat)?
-     | 'return' expr? ';'
-     | expr '=' expr ';'
-     | expr ';'
+stat : block    # BlockStat
+     | varDecl  # VarDeclStat
+     | 'if' expr 'then' stat ('else' stat)? # IfStat
+     | 'return' expr? ';'   # ReturnStat
+     | expr '=' expr ';'    # AssignStat
+     | expr ';' # ExprStat
      ;
 
 //expr: ID '(' exprList? ')'  # Call // function call f()

@@ -4,13 +4,12 @@ import cymbol.CymbolBaseListener;
 import cymbol.CymbolParser;
 
 public class FunctionCallListener extends CymbolBaseListener {
-  private Graph graph = new Graph();
+  private final Graph graph = new Graph();
   private String currentFunctionName = null;
 
   public Graph getGraph() {
     return graph;
   }
-
 
   @Override
   public void enterFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
