@@ -9,7 +9,3 @@ void a() {
     int y = x;
   }
 }
-
-void b(int z) {
-
-}
