@@ -7,6 +7,7 @@ digraph G {
 LocalScope1 [label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN = "1">LocalScope1</TD></TR><TR><TD>y</TD></TR></TABLE>>];
 LocalScope0 [label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN = "1">LocalScope0</TD></TR><TR><TD>x</TD></TR></TABLE>>];
 a [label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN = "0">a</TD></TR><TR><TD></TD></TR></TABLE>>];
+LocalScope3 [label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN = "0">LocalScope3</TD></TR><TR><TD></TD></TR></TABLE>>];
 LocalScope2 [label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN = "0">LocalScope2</TD></TR><TR><TD></TD></TR></TABLE>>];
 b [label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN = "1">b</TD></TR><TR><TD>z</TD></TR></TABLE>>];
 GlobalScope [label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN = "7">GlobalScope</TD></TR><TR><TD>int</TD><TD>double</TD><TD>void</TD><TD>x</TD><TD>y</TD><TD>a</TD><TD>b</TD></TR></TABLE>>];
@@ -16,4 +17,5 @@ LocalScope0 -> a;
 LocalScope1 -> LocalScope0;
 b -> GlobalScope;
 LocalScope2 -> b;
+LocalScope3 -> LocalScope2;
 }

@@ -36,12 +36,23 @@ public class BaseScope implements Scope {
 
   @Override
   public void define(Symbol symbol) {
-    // TODO
+    symbols.put(symbol.getName(), symbol);
+    System.out.println("+" + symbol.getName());
   }
 
   @Override
   public Symbol resolve(String name) {
-    // TODO
+    Symbol symbol = symbols.get(name);
+    if (symbol != null) {
+      System.out.println("*" + name);
+      return symbol;
+    }
+
+    if (enclosingScope != null) {
+      return enclosingScope.resolve(name);
+    }
+
+    System.err.println("Cannot find " + name);
     return null;
   }
 

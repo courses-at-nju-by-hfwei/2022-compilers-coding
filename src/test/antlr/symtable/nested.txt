@@ -9,3 +9,9 @@ void a() {
     int y = x;
   }
 }
+
+int b(int z) {
+  {
+    x = z;
+  }
+}
