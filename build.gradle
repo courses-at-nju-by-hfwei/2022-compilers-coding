@@ -19,8 +19,9 @@ dependencies {
 // ['-package', 'list']
 // "-long-messages"
 // "-atn"
+// "-Werror"
 generateGrammarSource {
-    arguments += ["-Xlog", "-visitor", "-atn", "-Werror"]
+    arguments += ["-Xlog", "-visitor"]
 }
 
 test {
