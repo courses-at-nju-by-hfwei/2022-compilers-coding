@@ -20,7 +20,6 @@ public class ExprAGMain {
     parser.setBuildParseTree(false);
 
     while (expr != null) {
-//      CharStream input = CharStreams.fromStream(expr + "\n");
       ANTLRInputStream input = new ANTLRInputStream(expr + "\n");
       ExprAGLexer lexer = new ExprAGLexer(input);
       lexer.setLine(line);

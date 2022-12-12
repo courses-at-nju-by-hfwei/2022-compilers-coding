@@ -1,4 +1,4 @@
-grammar ExprAG;
+grammar ExprAGCalc;
 
 @header {
 package ag;
@@ -19,9 +19,10 @@ import java.util.*;
   }
 }
 
-stat : expr NEWLINE
-     | ID '=' expr NEWLINE
-     | NEWLINE
+prog : stat* EOF ;
+
+stat : expr
+     | ID '=' expr
      ;
 
 expr
@@ -39,5 +40,4 @@ DIV : '/' ;
 
 ID : [a-z] ;
 INT : [0-9] ;
-NEWLINE : [\r\n] ;
 WS : [ \t\r\n] -> skip;

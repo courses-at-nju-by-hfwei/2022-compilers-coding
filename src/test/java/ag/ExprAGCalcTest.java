@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 
-public class ExprAGTest {
+public class ExprAGCalcTest {
   InputStream is = System.in;
 
   @BeforeMethod
@@ -26,12 +26,12 @@ public class ExprAGTest {
   }
 
   @Test
-  public void testExprAG() throws IOException {
+  public void testExprCalcAG() throws IOException {
     CharStream input = CharStreams.fromStream(is);
-    ExprAGLexer lexer = new ExprAGLexer(input);
+    ExprAGCalcLexer lexer = new ExprAGCalcLexer(input);
     CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-    ExprAGParser parser = new ExprAGParser(tokens);
-    ParseTree tree = parser.stat();
+    ExprAGCalcParser parser = new ExprAGCalcParser(tokens);
+    ParseTree tree = parser.prog();
   }
 }

@@ -19,7 +19,7 @@ public class TypeCheckingListenerTest {
 
   @BeforeMethod
   public void setUp() throws IOException {
-    is = new FileInputStream(Path.of("src/test/antlr/types/a.txt").toFile());
+    is = new FileInputStream(Path.of("src/test/antlr/types/ab.txt").toFile());
   }
 
   @AfterMethod
