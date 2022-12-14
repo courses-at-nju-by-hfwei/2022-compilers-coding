@@ -21,16 +21,16 @@ import java.util.*;
 
 prog : stat* EOF ;
 
-stat : expr
-     | ID '=' expr
+stat : expr         { System.out.println($expr.val); }
+     | ID '=' expr  { memory.put($ID.text, $expr.val); } // $ID.text: ID.getText()
      ;
 
-expr
-    : left = expr op = ('*' | '/') right = expr
-    | left = expr op = ('+' | '-') right = expr
-    | '(' expr ')'
-    | ID
-    | INT
+expr returns [int val]
+    : left = expr op = ('*' | '/') right = expr     { $val = eval($left.val, $right.val, $op.type); }
+    | left = expr op = ('+' | '-') right = expr     { $val = eval($left.val, $right.val, $op.type); }
+    | '(' expr ')'                                  { $val = $expr.val; }
+    | ID                                            { String id = $ID.text; $val = getOrDefault(id, 0); }
+    | INT                                           { $val = $INT.int; }
     ;
 
 ADD : '+' ;

@@ -67,14 +67,44 @@ public class TypeCheckingListener extends ArrayBaseListener {
   }
 
   /**
-   * (3) Type reference and inference
+   * (3) Type reference
    */
+  @Override
+  public void exitVarDecl(ArrayParser.VarDeclContext ctx) {
+    String varName = ctx.ID().getText();
+    String typeName = ctx.type().getText();
+    Type type = new BasicTypeSymbol(typeName);
+
+    symbolTable.put(varName, new VariableSymbol(varName, type));
+  }
+
+  @Override
+  public void exitId(ArrayParser.IdContext ctx) {
+    arrayTypeProperty.put(ctx,
+        symbolTable.get(ctx.ID().getText()).getType());
+  }
+
+  @Override
+  public void exitInt(ArrayParser.IntContext ctx) {
+    arrayTypeProperty.put(ctx, new BasicTypeSymbol("int"));
+  }
 
   /**
-   * (4) Type inference in array index expression
+   * (4) Type inference (in array index expression)
    */
+  @Override
+  public void exitArrayIndex(ArrayParser.ArrayIndexContext ctx) {
+    arrayTypeProperty.put(ctx,
+        ((ArrayType) arrayTypeProperty.get(ctx.primary)).subType);
+  }
 
   /**
    * (5) Type checking in "assignment"
    */
+  @Override
+  public void exitAssignStat(ArrayParser.AssignStatContext ctx) {
+    Type lhs = arrayTypeProperty.get(ctx.lhs);
+    Type rhs = arrayTypeProperty.get(ctx.rhs);
+    System.out.println(lhs + " : " + rhs);
+  }
 }
