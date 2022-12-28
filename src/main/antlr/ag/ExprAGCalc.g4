@@ -29,7 +29,7 @@ expr returns [int val]
     : left = expr op = ('*' | '/') right = expr     { $val = eval($left.val, $right.val, $op.type); }
     | left = expr op = ('+' | '-') right = expr     { $val = eval($left.val, $right.val, $op.type); }
     | '(' expr ')'                                  { $val = $expr.val; }
-    | ID                                            { String id = $ID.text; $val = getOrDefault(id, 0); }
+    | ID                                            { String id = $ID.text; $val = memory.getOrDefault(id, 0); }
     | INT                                           { $val = $INT.int; }
     ;
 
